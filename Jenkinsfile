@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     tools {
-        maven 'maven-3.9'
-        jdk 'JDK17'
+        maven 'maven1'
+        jdk 'JDK1'
     }
 
     stages {
@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/bhuvan-raj/MavenApp-deployment-to-Ec2-with-JenkinsPipeline.git'
+                    url: 'https://github.com/shiyasbsoft4-art/MavenApp-deployment-to-Ec2-with-JenkinsPipeline.git'
             }
         }
 
@@ -28,10 +28,10 @@ pipeline {
                         echo "Copying artifact to EC2..."
                         scp -o StrictHostKeyChecking=no \
                             target/demo-1.0.0.jar \
-                            ubuntu@34.224.84.252:/opt/app/
+                            ubuntu@13.51.176.217:/opt/app/
 
                         echo "Starting application on EC2..."
-                        ssh -o StrictHostKeyChecking=no ubuntu@34.224.84.252 << 'EOF'
+                        ssh -o StrictHostKeyChecking=no ubuntu@13.51.176.217 << 'EOF'
                             pkill -f demo-1.0.0.jar || true
                             nohup java -jar /opt/app/demo-1.0.0.jar \
                                 > /opt/app/app.log 2>&1 &
