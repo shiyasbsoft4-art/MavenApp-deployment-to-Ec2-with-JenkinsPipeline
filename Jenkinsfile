@@ -28,10 +28,10 @@ pipeline {
                         echo "Copying artifact to EC2..."
                         scp -o StrictHostKeyChecking=no \
                             target/demo-1.0.0.jar \
-                            ubuntu@13.51.176.217:/opt/app/
+                            ubuntu@13.60.227.187:/opt/app/
 
                         echo "Starting application on EC2..."
-                        ssh -o StrictHostKeyChecking=no ubuntu@13.51.176.217 << 'EOF'
+                        ssh -o StrictHostKeyChecking=no ubuntu@13.60.227.187 << 'EOF'
                             pkill -f demo-1.0.0.jar || true
                             nohup java -jar /opt/app/demo-1.0.0.jar \
                                 > /opt/app/app.log 2>&1 &
